@@ -1,50 +1,42 @@
 package com.matera.cadastro;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import static java.util.Arrays.asList;
 
-public class Cadastro {
+@Entity
+public class Cadastro extends AbstractEntity {
 
-    public static List<Cadastro>listaCadastro;
-
+    @NotNull
+    @Size(min = 4, max = 18)
     private String nome;
+
+    @NotNull
+    @Size(min = 4, max = 18)
     private String sobrenome;
+
+    @NotNull
+    @Size(min = 10, max = 30)
+    @Email(message = "Insira o e-mail")
+    private String email;
+
+    @NotNull
+    @Size(min = 3, max = 5)
     private double salario;
+
+    @NotNull
+    @Size(min = 8, max = 20)
     private int numeroDeDependentes;
-    private String cargo;
-    private String departamento;
 
-    public Cadastro(String nome, String sobrenome, double salario, int numeroDeDependentes, String cargo, String departamento) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.salario = salario;
-        this.numeroDeDependentes = numeroDeDependentes;
-        this.cargo = cargo;
-        this.departamento = departamento;
-    }
+    @NotNull
+    private Cargo cargo;
 
-    public Cadastro(){
+    @NotNull
+    private Departamento departamento;
 
-    }
-
-
-    public static void repositorioCadastro(){
-
-    listaCadastro = new ArrayList<>(asList(new Cadastro()));
-
-    }
-
-
-    public static List<Cadastro> getListaCadastro() {
-        return listaCadastro;
-    }
-
-    public static void setListaCadastro(List<Cadastro> listaCadastro) {
-        Cadastro.listaCadastro = listaCadastro;
-    }
 
     public String getNome() {
         return nome;
@@ -60,6 +52,14 @@ public class Cadastro {
 
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public double getSalario() {
@@ -78,19 +78,19 @@ public class Cadastro {
         this.numeroDeDependentes = numeroDeDependentes;
     }
 
-    public String getCargo() {
+    public Cargo getCargo() {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
 
-    public String getDepartamento() {
+    public Departamento getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(String departamento) {
+    public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
 }
